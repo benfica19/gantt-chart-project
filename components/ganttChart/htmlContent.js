@@ -5,12 +5,7 @@ export function createHtmlContentFragment() {
   <style>
     ${cssStyles()}
   </style>
-
   <div id="gantt-container">
-
-      <div class="title">
-        <h1> Gantt Tracker</h1>
-      </div>
 
       <div id="gantt-grid-container">
         <div id="gantt-grid-container__tasks"></div>

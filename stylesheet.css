@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#taskbar-ganttchart {
+    display: flex;
+    align-items: center; 
+    gap: 10px;
+    background-color: gainsboro;
+  }
+  
+  #taskbar-ganttchart > div {
+    display: flex;
+    align-items: center;
+  }
+
+#dropdownMenuButton {
+    width: 300px; 
+    text-align: center;
+    background-color: white;
+    color: black;
+  }
+  
+  #dropdownMenuButton {
+    padding: 8px 8px;
+}
+
+#dropdownMenuButton::after {
+    display: none; /* Hide the caret */
+  }
+
+.dropdown-menu {
+    min-width: 300px;
+    width: auto;
+    left: 0; /* Align the menu with the left edge of the button */
+    position: absolute;
+}
+
+.title {
+    text-align: center; 
+    background-color:black;
+    color : white;
+    height: 3rem;
+  }
+
+#initialmessage {
+    color: gray;
+    font-size: medium;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+
+

@@ -1,0 +1,17 @@
+#header, footer {
+    flex: 0 0 20%; /* Each section takes up 10% of the viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.0em;
+}
+
+#main {
+    flex-grow: 1;
+} 
+
+#header{
+    background-color: black;
+    color: white;
+    text-align: center;
+}

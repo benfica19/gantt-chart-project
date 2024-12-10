@@ -57,11 +57,6 @@ export function cssStyles() {
       cursor: pointer;
     }
     
-    .title {
-      text-align: center; 
-      margin-bottom: 20px
-    }
-
     #gantt-container {
       padding: 1rem;
     }

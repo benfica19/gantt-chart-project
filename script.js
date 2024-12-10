@@ -1,6 +1,10 @@
 import { GanttChart } from "./components/ganttChart/ganttChart.js";
+import {populateDropdown} from "./components/ganttChart/APIcalls/databaseconnection.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  populateDropdown()
+
+
   // get data - could get from server
   const tasks = [
     { id: 1, name: "Task 1" },
@@ -35,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const ganttCharts = document.querySelectorAll("[role=gantt-chart]");
+  ganttCharts.textContent = "This is the Gantt Chart content!";
   ganttCharts.forEach((gantChart) => {
     new GanttChart(gantChart, tasks, taskDurations);
   });
