@@ -6,11 +6,11 @@ export function createHtmlContentFragment() {
     ${cssStyles()}
   </style>
   <div id="gantt-container">
-
       <div id="gantt-grid-container">
         <div id="gantt-grid-container__tasks"></div>
         <div id="gantt-grid-container__time"></div>
       </div>
+
 
       <div id="add-forms-container">
          
@@ -23,7 +23,7 @@ export function createHtmlContentFragment() {
                     Add
                   </button>
                 </form>
-       
+        
         
                 
                 <form id="add-task-duration">
@@ -51,7 +51,7 @@ export function createHtmlContentFragment() {
                       Add
                     </button>
                 </form>
-               
+                
             </div>
           
           <div class="tracker-period">                 
@@ -73,6 +73,7 @@ export function createHtmlContentFragment() {
               </div>
            </div>
       <div>
+  
   </div>
   `;
 

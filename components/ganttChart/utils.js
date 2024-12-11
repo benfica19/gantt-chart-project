@@ -6,7 +6,9 @@ export function monthDiff(firstMonth, lastMonth) {
   return months <= 0 ? 0 : months;
 }
 
-export function dayDiff(startDate, endDate) {
+export function dayDiff(startDatestr, endDatestr) {
+  let startDate = new Date(startDatestr)
+  let endDate = new Date(endDatestr)
   const difference = endDate.getTime() - startDate.getTime();
   const days = Math.ceil(difference / (1000 * 3600 * 24)) + 1;
   return days;
@@ -35,7 +37,8 @@ export function createFormattedDateFromStr(year, month, day) {
   return `${year}-${monthStr}-${dayStr}`;
 }
 
-export function createFormattedDateFromDate(date) {
+export function createFormattedDateFromDate(datestr) {
+  let date =  new Date(datestr)
   let monthStr = (date.getMonth() + 1).toString();
   let dayStr = date.getDate().toString();
 

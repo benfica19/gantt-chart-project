@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { getFirestore, collection, doc, getDocs, getDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+import { loadGanttChart } from "../../../script.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -40,7 +41,7 @@ async function readAllDocumentKeys() {
   }
 }
 
-readAllDocumentKeys()
+// readAllDocumentKeys()
 
 // Function to populate the dropdown
 async function populateDropdown() {
@@ -66,13 +67,57 @@ async function populateDropdown() {
         const button = document.getElementById('dropdownMenuButton');
         button.textContent = item.title;
         button.setAttribute('data-value', item.value);
-        // fetchChartData(item.value);
+        fetchChartData(item.value);
       });
   
       dropdownMenu.appendChild(dropdownItem);
     });
   }
   export {populateDropdown}
+
+// Function to fetch GanttChart data from the database.
+async function fetchChartData(value) {
+  // console.log(value);
+  try {
+    const docRef = doc(db, "Roadmaps_Board", value);
+    const docSnap = await getDoc(docRef);
+    
+    if (docSnap.exists()) {
+        const data = docSnap.data();
+        console.log(data)
+        loadGanttChart(data.tasks, data.taskDurations)
+    } else {
+        console.log("No such document!");
+    }
+} catch (error) {
+    console.error("Error getting document: ", error);
+}
+
+}
+
+export {fetchChartData}
+
+//Function to create a new File on the database
+async function createNewFile(filename,fileDescription){
+  console.log("createNewFile Called")
+  try {
+    const docRef = await addDoc(collection(db, 'Roadmaps_Board'),{
+      filename: filename,
+      description: fileDescription,
+      tasks:[],
+      taskDurations:[],
+      createdAt: new Date().toISOString(),
+    });
+    console.log("Project created with ID:", docRef.id);
+    return docRef.id;
+  } catch (error) {
+      console.error("Error creating new project:", error);
+      throw error;
+  }
+}
+
+export {createNewFile}
+
   
 //   // Call the populate function when the content is loaded
 //   document.addEventListener('DOMContentLoaded', () => {
