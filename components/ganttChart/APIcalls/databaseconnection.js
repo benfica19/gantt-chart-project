@@ -85,7 +85,7 @@ async function fetchChartData(value) {
     if (docSnap.exists()) {
         const data = docSnap.data();
         console.log(data)
-        loadGanttChart(data.tasks, data.taskDurations)
+        loadGanttChart(data.tasks, data.taskDurations, data.description)
     } else {
         console.log("No such document!");
     }
