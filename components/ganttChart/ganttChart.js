@@ -8,7 +8,7 @@ import {
   createFormattedDateFromDate,
 } from "./utils.js";
 
-export function GanttChart(ganttChartElement, tasks, taskDurations) {
+export function GanttChart(ganttChartElement, tasks, taskDurations, taskDescription) {
   const months = [
     "Jan",
     "Feb",
@@ -25,6 +25,10 @@ export function GanttChart(ganttChartElement, tasks, taskDurations) {
   ];
   const contentFragment = createHtmlContentFragment();
   let taskDurationElDragged;
+
+  //add data to description section
+  const descriptionBox = contentFragment.querySelector("#gantt-description");
+  descriptionBox.innerHTML = `<p class="textformat"><b><span class="heading3color">Description:&nbsp;<span></b>${taskDescription}</p></b>`;
 
   // add date selector values
   let monthOptionsHTMLStrArr = [];
@@ -251,6 +255,8 @@ export function GanttChart(ganttChartElement, tasks, taskDurations) {
   }
 
   function addTaskDurations() {
+    console.log("Task Durations")
+    console.log(taskDurations)
     taskDurations.forEach((taskDuration) => {
       const dateStr = createFormattedDateFromDate(taskDuration.start);
       // find gantt-time-period-cell start position
@@ -376,11 +382,14 @@ export function GanttChart(ganttChartElement, tasks, taskDurations) {
     };
 
     // add task duration
+    console.log(taskDurations)
     taskDurations.push(taskDuration);
     // find gantt-time-period-cell start position
     const startCell = containerTimePeriods.querySelector(
       `div[data-task="${taskDuration.task}"][data-date="${start}"]`
     );
+    console.log(startCell)
+    console.log("StartCell Content")
 
     if (startCell) {
       // taskDuration bar is a child of start date position of specific task
@@ -390,14 +399,32 @@ export function GanttChart(ganttChartElement, tasks, taskDurations) {
 
   function handleAddTaskForm(e) {
     e.preventDefault();
+    console.log("Add Task")
     const newTaskName = e.target.elements[0].value;
     // find largest task number, add 1 for new task - else could end up with tasks with same id
-    const maxIdVal = tasks.reduce(function (a, b) {
-      return Math.max(a, b.id);
-    }, -Infinity);
+    let maxIdVal = 1
+    if (tasks.length > 0){
+      maxIdVal = tasks.reduce(function (a, b) {
+        return Math.max(a, b.id);
+      }, -Infinity);
+    }
+
     // create new task
     tasks.push({ id: maxIdVal + 1, name: newTaskName });
-    // re-create grid
+    // add task duration -- bydefault 1 week from current date as endDate.
+    const startDate = new Date();
+    const endDate = new Date();
+    endDate.setDate(startDate.getDate() + 7); 
+    const taskDuration = {
+      id: (maxIdVal + 1).toString(),
+      start: startDate,
+      end: endDate,
+      task: maxIdVal + 1,
+    };
+    taskDurations.push(taskDuration);
+    //Add new entry to database
+    console.log(tasks)
+    console.log("______________")
     createGrid();
   }
 

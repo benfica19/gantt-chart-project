@@ -15,11 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-function loadGanttChart(tasks,taskDurations){
+function loadGanttChart(tasks, taskDurations, taskDescriptions){
     // console.log(data)
     // console.log("data-loaded")
 
-  //   const tasks = [
+  //   tasks = [
   //   { id: 1, name: "Task 1" },
   //   { id: 2, name: "Task 2" },
   //   { id: 3, name: "Task 3" },
@@ -29,7 +29,7 @@ function loadGanttChart(tasks,taskDurations){
   //   { id: 7, name: "Task 7" },
   //   { id: 8, name: "Task 8" },
   // ];
-  // const taskDurations = [
+  // taskDurations = [
   //   {
   //     id: "1",
   //     start: new Date("2022/1/2"),
@@ -58,7 +58,7 @@ function loadGanttChart(tasks,taskDurations){
   // });
   const ganttChartContainer = document.querySelector("[role=gantt-chart]");
   ganttChartContainer.innerHTML = "";
-  new GanttChart(ganttChartContainer, tasks, taskDurations);
+  new GanttChart(ganttChartContainer, tasks, taskDurations, taskDescriptions);
 }
 
 export { loadGanttChart }
